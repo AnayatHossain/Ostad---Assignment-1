@@ -1,0 +1,44 @@
+import 'dart:core';
+
+class Book {
+  static int totalBooks = 0;
+  String title;
+  String author;
+  int publicationYear;
+  int pagesRead;
+  Book(this.title, this.author, this.publicationYear, [this.pagesRead = 0]) {
+    totalBooks++;
+  }
+
+  void read(int pages) {
+    pagesRead += pages;
+  }
+
+  int getPagesRead() => pagesRead;
+  String getTitle() => title;
+  String getAuthor() => author;
+  int getPublicationYear() => publicationYear;
+  int getBookAge() {
+    int currentYear = DateTime.now().year;
+    return currentYear - publicationYear;
+  }
+}
+
+void main() {
+  Book book1 = Book("1984", "George Orwell", 1949);
+  Book book2 = Book("To Kill a Mockingbird", "Harper Lee", 1960);
+  Book book3 = Book("The Catcher in the Rye", "J.D. Salinger", 1951);
+  book1.read(100);
+  book2.read(50);
+  book3.read(75);
+  List<Book> books = [book1, book2, book3];
+
+  for (var book in books) {
+    print("Title: ${book.getTitle()}");
+    print("Author: ${book.getAuthor()}");
+    print("Publication Year: ${book.getPublicationYear()}");
+    print("Pages Read: ${book.getPagesRead()}");
+    print("Book Age: ${book.getBookAge()} years\n");
+  }
+  print("Total books created: ${Book.totalBooks}");
+}
